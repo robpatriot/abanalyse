@@ -18,4 +18,13 @@
         <url-pattern>/Abanalyse</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>Upload</servlet-name>
+        <servlet-class>org.blim.servlet.Upload</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Upload</servlet-name>
+        <url-pattern>/upload.do</url-pattern>
+    </servlet-mapping>
 </web-app>

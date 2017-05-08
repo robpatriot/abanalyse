@@ -3,8 +3,11 @@ apply plugin : "java"
  
 repositories {
     mavenCentral()
+    maven { url "https://repository.apache.org/content/repositories/snapshots/" }
 }
 
 dependencies {
-    compile "javax.servlet:servlet-api:2.5"
+    compileOnly "javax.servlet:servlet-api:2.5"
+    compile "org.apache.commons:commons-imaging:1.0-SNAPSHOT"
+    compile "commons-fileupload:commons-fileupload:1.3"
 }
