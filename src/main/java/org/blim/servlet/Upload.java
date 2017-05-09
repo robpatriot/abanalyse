@@ -47,9 +47,9 @@ public class Upload extends HttpServlet {
                     for (int x = 0; x < image.getWidth(); x++) {
                         for (int y = 0; y < image.getHeight(); y++) {
                             int p = image.getRGB(x, y);
-                            byte red = (byte)(p & 0xFF);
-                            byte green = (byte)(p >> 8 & 0xFF);
-                            byte blue = (byte)(p >> 16 & 0xFF);
+                            int blue = (p & 0x000000FF);
+                            int green = (p >> 8) & 0x000000FF;
+                            int red = (p >> 16) & 0x000000FF;
                             if (red == 255 && green == 0 && blue == 0) {
                                 redCount++;
                             }
