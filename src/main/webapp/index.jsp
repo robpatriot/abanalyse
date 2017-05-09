@@ -4,7 +4,7 @@
     <title>Abanalyse</title>
 </head>
 <body>
-    <a href="/AbanalyseApp/Abanalyse">Click here to send GET request</a>
+    <a href="Abanalyse">Click here to send GET request</a>
 
     <br/><br/>
 
