@@ -9,6 +9,8 @@ import org.apache.commons.imaging.Imaging;
 import org.apache.commons.imaging.ImagingConstants;
 import org.apache.commons.io.FilenameUtils;
 
+import org.blim.imaging.Image;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -44,23 +46,15 @@ public class Upload extends HttpServlet {
                     // Process form file field (input type="file").
                     final BufferedImage image = Imaging.getBufferedImage(item.getInputStream());
 
-                    for (int x = 0; x < image.getWidth(); x++) {
-                        for (int y = 0; y < image.getHeight(); y++) {
-                            int p = image.getRGB(x, y);
-                            int blue = (p & 0x000000FF);
-                            int green = (p >> 8) & 0x000000FF;
-                            int red = (p >> 16) & 0x000000FF;
-                            if (red == 255 && green == 0 && blue == 0) {
-                                redCount++;
-                            }
-                        }
-                    }
+                    org.blim.imaging.Image abImage = new Image(image);
+                    redCount = abImage.CountRGB(255,0, 0);
                 }
             }
         } catch (FileUploadException e) {
             throw new ServletException("Cannot parse multipart request.", e);
         } catch (ImageReadException e) {
-            throw new ServletException("Failed to decode image data: ", e);
+            // TODO this needs to move to blim imaging
+            throw new ServletException("Failed to decode imaging data: ", e);
         }
 
         PrintWriter writer = response.getWriter();
