@@ -4,7 +4,6 @@ import org.apache.commons.imaging.Imaging;
 
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
-import org.junit.Test;
 
 import java.awt.image.BufferedImage;
 
@@ -17,18 +16,30 @@ public class ImageTest {
     @Test
     public void testCountRGB() throws Exception {
 
-        final BufferedImage image = Imaging.getBufferedImage(this.getClass().getResourceAsStream("small.png"));
-
+        BufferedImage image = Imaging.getBufferedImage(this.getClass().getResourceAsStream("small.png"));
         Image abImage = new Image(image);
 
         int count = abImage.CountRGB(255,0, 0);
-        assertEquals(1, count);
-
+        assertEquals("Red was not 1 as expected", 1, count);
         count = abImage.CountRGB(0,255, 0);
-        assertEquals(1, count);
+        assertEquals("Green was not 1 as expected", 1, count);
+        count = abImage.CountRGB(255,255, 255);
+        assertEquals("White was not 0 as expected", 0, count);
 
-        count = abImage.CountRGB(1,1, 1);
-        assertEquals(0, count);
+        image = Imaging.getBufferedImage(this.getClass().getResourceAsStream("large.png"));
+        abImage = new Image(image);
+
+        count = abImage.CountRGB(255,0, 0);
+        assertEquals("Red was not 2422 as expected", 2422, count);
+        count = abImage.CountRGB(0,0, 0);
+        assertEquals("Black was not 0 as expected",0, count);
     }
 
+    @Test
+    public void testOpenCVWorks() throws Exception {
+        BufferedImage image = Imaging.getBufferedImage(this.getClass().getResourceAsStream("small.png"));
+        Image abImage = new Image(image);
+
+        abImage.useOpenCV();
+    }
 }

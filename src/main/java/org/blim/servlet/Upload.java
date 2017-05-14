@@ -53,7 +53,6 @@ public class Upload extends HttpServlet {
         } catch (FileUploadException e) {
             throw new ServletException("Cannot parse multipart request.", e);
         } catch (ImageReadException e) {
-            // TODO this needs to move to blim imaging
             throw new ServletException("Failed to decode imaging data: ", e);
         }
 
