@@ -40,6 +40,7 @@ public class abImageTest {
         BufferedImage image = Imaging.getBufferedImage(this.getClass().getResourceAsStream("redblobs.png"));
         abImage abImage = new abImage(image);
 
-        abImage.detectBlobs();
+        int blobCount = abImage.detectBlobs();
+        assertEquals("Blob count was not 3 as expected got " + blobCount, 3, blobCount);
     }
 }

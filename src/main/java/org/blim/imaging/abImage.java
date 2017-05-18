@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import static java.lang.Byte.toUnsignedInt;
 import static org.opencv.core.CvType.CV_8UC3;
 
 /**
@@ -72,7 +71,7 @@ public class abImage {
         mHsvUpperBound.val[2] = hsvColor.val[2] + mColorRadius.val[2];
     }
 
-    public void detectBlobs() {
+    public int detectBlobs() {
         Mat matBgr = new Mat(mImage.getHeight(), mImage.getWidth(), CV_8UC3);
         Mat matPyrDownBgr = new Mat();
         Mat matHsv = new Mat();
@@ -122,6 +121,8 @@ public class abImage {
         Imgproc.drawContours(matBgr, mContours, -1, CONTOUR_COLOR);
 
         drawImage(toBufferedImage(matBgr));
+
+        return mContours.size();
     }
 
     private void drawImage(BufferedImage showImage) {
