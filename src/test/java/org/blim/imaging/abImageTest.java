@@ -37,7 +37,7 @@ public class abImageTest {
 
     @Test
     public void testOpenCV() throws Exception {
-        BufferedImage image = Imaging.getBufferedImage(this.getClass().getResourceAsStream("large.png"));
+        BufferedImage image = Imaging.getBufferedImage(this.getClass().getResourceAsStream("redblobs.png"));
         abImage abImage = new abImage(image);
 
         abImage.detectBlobs();

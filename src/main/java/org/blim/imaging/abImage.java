@@ -84,12 +84,12 @@ public class abImage {
         matBgr.put(0,0, pixels);
         drawImage(toBufferedImage(matBgr));
 
-        //Imgproc.pyrDown(matBgr, matPyrDownBgr);
+        Imgproc.pyrDown(matBgr, matPyrDownBgr);
 
-        Imgproc.cvtColor(matBgr, matHsv, Imgproc.COLOR_BGR2HSV);
+        Imgproc.cvtColor(matPyrDownBgr, matHsv, Imgproc.COLOR_BGR2HSV);
 
         setHsvColour(new Scalar(0,255,255));
-        
+
         Core.inRange(matHsv, mHsvLowerBound, mHsvUpperBound, matMask);
         drawImage(toBufferedImage(matMask));
         Imgproc.dilate(matMask, matDilMask, new Mat());
@@ -114,8 +114,7 @@ public class abImage {
         while (each.hasNext()) {
             MatOfPoint contour = each.next();
             if (Imgproc.contourArea(contour) > mMinContourArea*maxArea) {
-                // Don't need to scale it if we don't use pyrDown
-                //Core.multiply(contour, new Scalar(2,2), contour);
+                Core.multiply(contour, new Scalar(2,2), contour);
                 mContours.add(contour);
             }
         }
@@ -128,7 +127,7 @@ public class abImage {
     private void drawImage(BufferedImage showImage) {
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1000, 1000);
+        frame.setSize(showImage.getWidth() + 50, showImage.getHeight() + 50);
 
         JPanel panel = new JPanel() {
             @Override
