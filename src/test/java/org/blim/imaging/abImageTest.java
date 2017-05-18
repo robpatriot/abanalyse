@@ -11,13 +11,13 @@ import java.awt.image.BufferedImage;
 /**
  * Created by Rob on 14/05/2017.
  */
-public class ImageTest {
+public class abImageTest {
 
     @Test
     public void testCountRGB() throws Exception {
 
         BufferedImage image = Imaging.getBufferedImage(this.getClass().getResourceAsStream("small.png"));
-        Image abImage = new Image(image);
+        abImage abImage = new abImage(image);
 
         int count = abImage.CountRGB(255,0, 0);
         assertEquals("Red was not 1 as expected", 1, count);
@@ -27,7 +27,7 @@ public class ImageTest {
         assertEquals("White was not 0 as expected", 0, count);
 
         image = Imaging.getBufferedImage(this.getClass().getResourceAsStream("large.png"));
-        abImage = new Image(image);
+        abImage = new abImage(image);
 
         count = abImage.CountRGB(255,0, 0);
         assertEquals("Red was not 2422 as expected", 2422, count);
@@ -36,10 +36,10 @@ public class ImageTest {
     }
 
     @Test
-    public void testOpenCVWorks() throws Exception {
-        BufferedImage image = Imaging.getBufferedImage(this.getClass().getResourceAsStream("small.png"));
-        Image abImage = new Image(image);
+    public void testOpenCV() throws Exception {
+        BufferedImage image = Imaging.getBufferedImage(this.getClass().getResourceAsStream("large.png"));
+        abImage abImage = new abImage(image);
 
-        abImage.useOpenCV();
+        abImage.detectBlobs();
     }
 }

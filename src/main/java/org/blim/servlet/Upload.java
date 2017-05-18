@@ -6,22 +6,17 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.imaging.ImageReadException;
 import org.apache.commons.imaging.Imaging;
-import org.apache.commons.imaging.ImagingConstants;
-import org.apache.commons.io.FilenameUtils;
 
-import org.blim.imaging.Image;
+import org.blim.imaging.abImage;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Lee on 07/05/2017.
@@ -46,7 +41,7 @@ public class Upload extends HttpServlet {
                     // Process form file field (input type="file").
                     final BufferedImage image = Imaging.getBufferedImage(item.getInputStream());
 
-                    org.blim.imaging.Image abImage = new Image(image);
+                    abImage abImage = new abImage(image);
                     redCount = abImage.CountRGB(255,0, 0);
                 }
             }
@@ -57,7 +52,7 @@ public class Upload extends HttpServlet {
         }
 
         PrintWriter writer = response.getWriter();
-        writer.println("Image contains " + redCount + " red pixels.");
+        writer.println("abImage contains " + redCount + " red pixels.");
         writer.flush();
     }
 }
